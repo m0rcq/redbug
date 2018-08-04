@@ -2,5 +2,6 @@
 .\#*
 /_build/
 \#*
+erl_crash.dump
 src/redbug_lexer.erl
 src/redbug_parser.erl
