@@ -29,6 +29,15 @@ Rules.
 {WS}+ :
   skip_token.
 
+<[0-9]+\.[0-9]+\.[0-9]+> :
+  {token, {'pid', TokenLine, list_to_pid(TokenChars)}}.
+
+#Ref<[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+> :
+  {token, {'ref', TokenLine, list_to_ref(TokenChars)}}.
+
+#Port<[0-9]+\.[0-9]+> :
+  {token, {'port', TokenLine, list_to_port(TokenChars)}}.
+
 ({S}) :
   {token, {to_atom(TokenChars), TokenLine}}.
 

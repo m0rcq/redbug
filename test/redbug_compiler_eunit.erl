@@ -18,8 +18,12 @@ x_test_() ->
       unit("f:c(0.1)")),
 
    ?_assertEqual(
+      {syntax_error,"syntax error before: '#'"},
+      unit("f:c(#Port<0.0.1>)")),
+
+   ?_assertEqual(
       {syntax_error,"at: ."},
-      unit("f:c(<0.0.1>)")),
+      unit("f:c(#port<0.0>)")),
 
    ?_assertEqual(
       {syntax_error,"bad input"},
@@ -448,6 +452,18 @@ x_test_() ->
        [{['$1'],[{'==',['$1','$1'],['$1','$1']}],[]}],
        [local]},
       unit("x:c(A)when [A,A] == [A]++[A]")),
+
+   ?_assertEqual(
+      {{f,c,1},[{[list_to_pid("<0.0.1>")],[],[]}],[local]},
+      unit("f:c(<0.0.1>)")),
+
+   ?_assertEqual(
+      {{f,c,1},[{[list_to_port("#Port<0.0>")],[],[]}],[local]},
+      unit("f:c(#Port<0.0>)")),
+
+   ?_assertEqual(
+      {{f,c,1},[{[list_to_ref("#Ref<0.0.1.0>")],[],[]}],[local]},
+      unit("f:c(#Ref<0.0.1.0>)")),
 
    ?_assertEqual(
       {{f,m,1},

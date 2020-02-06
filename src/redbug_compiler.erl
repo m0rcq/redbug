@@ -131,6 +131,9 @@ chk_action({action, Act}, _)           -> die("illegal action", Act).
 lift({atom, Value}, Ctxt) -> {Value, Ctxt};
 lift({int,  Value}, Ctxt) -> {Value, Ctxt};
 lift({bin,  Value}, Ctxt) -> {Value, Ctxt};
+lift({port, Value}, Ctxt) -> {Value, Ctxt};
+lift({pid,  Value}, Ctxt) -> {Value, Ctxt};
+lift({ref,  Value}, Ctxt) -> {Value, Ctxt};
 %% variables
 lift({variable, "_"}, Ctxt) -> {'_', Ctxt};
 lift({variable, Var}, Ctxt) -> lift_var(Var, Ctxt);

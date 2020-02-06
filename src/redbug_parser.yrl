@@ -10,6 +10,7 @@ Nonterminals
 Terminals
   '(' ')' '[' ']' '{' '}'
   '->' 'when' ':' ';' '#' ',' '=' ':=' '=>' '#{' '/' '|' '++'
+  'pid' 'ref' 'port'
   'variable' 'bin' 'int' 'atom' 'string'
   'comparison_op' 'arithmetic_op' 'boolean_op1' 'boolean_op2'
   'type_test1' 'type_isrec' 'bif0' 'bif1' 'bif2'.
@@ -57,6 +58,9 @@ terms -> terms ',' term : '$1' ++ ['$3'].
 term -> 'variable' : e13('$1').
 term -> 'bin'      : e13('$1').
 term -> 'int'      : e13('$1').
+term -> 'pid'      : e13('$1').
+term -> 'ref'      : e13('$1').
+term -> 'port'     : e13('$1').
 term -> atomic     : '$1'.
 term -> list       : {list, '$1'}.
 term -> tuple      : {tuple, '$1'}.
