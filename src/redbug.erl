@@ -414,7 +414,7 @@ mk_outer(#cnf{print_depth=Depth, print_msec=MS, print_return=Ret} = Cnf) ->
                   AL = string:join(Args, ", "),
                   OutFun("~n% ~s ~s~n% ~w:~w(~s)", [MTS, to_str(PI), M, F, AL])
               end,
-              lists:foreach(fun(L) -> OutFun("  ~s", [L]) end, stak(Bin));
+              lists:foreach(fun(L) -> OutFun("%   ~s", [L]) end, stak(Bin));
             false->
               ok
           end;
@@ -496,7 +496,8 @@ ts_ms({H, M, S, Us}) ->
 
 %%% call stack handler
 stak(Bin) ->
-  lists:foldl(fun munge/2, [], string:tokens(binary_to_list(Bin), "\n")).
+  L = string:tokens(binary_to_list(Bin), "\n"),
+  lists:reverse(lists:foldl(fun munge/2, [], L)).
 
 munge(I, Out) ->
   case lists:reverse(I) of
